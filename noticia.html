@@ -46,5 +46,29 @@ const id=new URLSearchParams(location.search).get("id"),s=stories[id];
 document.getElementById("year").textContent=new Date().getFullYear();
 if(s){document.title=s.title+" | Kayor";document.querySelector('meta[name="description"]').content=s.summary;document.getElementById("category").textContent=s.cat;document.getElementById("headline").textContent=s.title;document.getElementById("summary").textContent=s.summary;document.getElementById("meta").textContent="Redação Kayor · "+s.read+" de leitura · Texto demonstrativo";document.getElementById("cover").style.backgroundImage="url('"+s.img+"')";document.getElementById("bodycopy").innerHTML='<p>Esta página demonstra a estrutura editorial de uma matéria do Kayor. Antes de publicar, a redação deve inserir informações verificadas, datas, documentos e declarações atribuídas corretamente.</p><h2>O que é preciso saber</h2><p>Apresente aqui os fatos principais com linguagem clara, distinguindo informação confirmada, contexto e análise. Cada afirmação factual deve ser sustentada por apuração e fontes identificáveis.</p><h2>Contexto e próximos passos</h2><p>Explique o histórico do tema, quem são os atores envolvidos e o que acontece a seguir. Inclua links para documentos originais e outras matérias relacionadas quando disponíveis.</p><p><strong>Fontes:</strong> adicionar as fontes consultadas e os respectivos links antes da publicação.</p>';}
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+<script>
+(async()=>{
+const id=new URLSearchParams(location.search).get("id");if(!id)return;
+try{
+const client=window.supabase.createClient("https://fcgjtxfrgezbxfdxtouf.supabase.co","sb_publishable_edom7QrsN88KKo8JdwpP5w_ef22VbSv");
+const {data:a,error}=await client.from("kayor_articles").select("*").eq("slug",id).eq("status","published").maybeSingle();
+if(error||!a)return;
+const $=id=>document.getElementById(id);
+document.title=(a.seo_title||a.title)+" | Kayor";
+document.querySelector('meta[name="description"]').content=a.seo_description||a.subtitle||"Leia a matéria no Kayor.";
+$("category").textContent=(a.category||"Brasil").toUpperCase();
+$("headline").textContent=a.title;
+$("summary").textContent=a.subtitle||"";
+$("meta").textContent=(a.author||"Redação Kayor")+" · "+(a.published_at?new Intl.DateTimeFormat("pt-BR",{dateStyle:"long",timeStyle:"short"}).format(new Date(a.published_at)):"");
+if(a.cover_image_url){$("cover").style.backgroundImage="url("+JSON.stringify(a.cover_image_url)+")";$("cover").setAttribute("aria-label",a.cover_alt||a.title);$("cover").style.display="block"}else{$("cover").style.display="none"}
+const cap=document.querySelector(".caption");cap.textContent=a.cover_alt||"Imagem da matéria";cap.style.display=a.cover_image_url?"block":"none";
+const notice=document.querySelector(".notice");notice.style.display="none";
+$("bodycopy").innerHTML=DOMPurify.sanitize(a.body_html||"",{USE_PROFILES:{html:true},ADD_ATTR:["target","rel"]});
+$("bodycopy").querySelectorAll("a").forEach(link=>{link.target="_blank";link.rel="noopener noreferrer"});
+if(Array.isArray(a.source_links)&&a.source_links.length){const h=document.createElement("h2");h.textContent="Fontes consultadas";const list=document.createElement("ul");a.source_links.forEach(item=>{const url=typeof item==="string"?item:item.url;if(!url)return;try{const parsed=new URL(url);if(!["http:","https:"].includes(parsed.protocol))return;const li=document.createElement("li"),link=document.createElement("a");link.href=parsed.href;link.textContent=parsed.hostname+parsed.pathname;link.target="_blank";link.rel="noopener noreferrer";li.append(link);list.append(li)}catch{}});$("bodycopy").append(h,list)}
+})();
+</script>
 </body>
 </html>
