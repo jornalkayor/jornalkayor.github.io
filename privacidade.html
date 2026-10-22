@@ -90,6 +90,39 @@ img,svg,video,iframe{max-width:100%}
 :root[data-theme="dark"] #kayor-theme-toggle{background:#e6edf5;color:#101720;border-color:#e6edf5}
 @media(max-width:480px){#kayor-theme-toggle{right:12px;bottom:12px;padding:10px 12px}}
 
+
+/* kayor-darkmode-refinements */
+:root[data-theme="dark"] img,
+:root[data-theme="dark"] picture,
+:root[data-theme="dark"] .lead-image,
+:root[data-theme="dark"] .thumb,
+:root[data-theme="dark"] .cover,
+:root[data-theme="dark"] figure,
+:root[data-theme="dark"] .article figure,
+:root[data-theme="dark"] .article img{
+  background-color:#101720!important;
+  border-color:#344255!important;
+}
+:root[data-theme="dark"] img.lead-image,
+:root[data-theme="dark"] img.thumb,
+:root[data-theme="dark"] .lead-image img,
+:root[data-theme="dark"] .thumb img,
+:root[data-theme="dark"] .cover img{
+  background:#101720!important;
+  box-shadow:none!important;
+}
+:root[data-theme="dark"] .cover{background-color:#101720!important}
+#kayor-theme-toggle{
+  bottom:82px!important;
+  right:18px!important;
+  z-index:9998!important;
+}
+@media(max-width:600px){
+  #kayor-theme-toggle{bottom:76px!important;right:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #kayor-theme-toggle{transition:none!important}
+}
 </style></head>
 <body><div class="top"><div class="container">KAYOR · PRIVACIDADE</div></div><header class="container masthead"><a class="brand" href="./" aria-label="Kayor — página inicial"><img src="Logos/kayor_horizontal.png" alt="Kayor"></a></header><div class="container"><nav class="nav"><a href="./">← VOLTAR À PÁGINA INICIAL</a></nav></div>
 <main class="container"><article class="content"><div class="eyebrow">Privacidade</div><h1>Como o Kayor trata dados</h1>
