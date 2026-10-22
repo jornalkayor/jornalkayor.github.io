@@ -30,7 +30,7 @@
 <div class="datebar"><div class="container"><span id="today">KAYOR · NOTÍCIAS</span><span>Jornalismo com contexto</span></div></div>
 <header class="masthead container"><a class="brand" href="./" aria-label="Kayor, página inicial"><img src="Logos/kayor_horizontal.png" alt="Kayor — logo horizontal" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/CaioBarretor/portif-lio-site-jornal/main/Logos/kayor_horizontal.png'"></a><div class="tagline">INFORMAÇÃO · CONTEXTO · CREDIBILIDADE</div></header>
 <div class="container">
-<nav class="nav" aria-label="Editorias"><a href="#inicio" class="active" data-filter="Todas">INÍCIO</a><a href="#ultimas" data-filter="Brasil">BRASIL</a><a href="#ultimas" data-filter="Política">POLÍTICA</a><a href="#ultimas" data-filter="Economia">ECONOMIA</a><a href="#ultimas" data-filter="Mundo">MUNDO</a><a href="#pernambuco" data-filter="Pernambuco">PERNAMBUCO</a><a href="#ultimas" data-filter="Tecnologia">TECNOLOGIA</a></nav>
+<nav class="nav" aria-label="Editorias"><a href="/" class="active">INÍCIO</a><a href="/brasil/">BRASIL</a><a href="/politica/">POLÍTICA</a><a href="/economia/">ECONOMIA</a><a href="/mundo/">MUNDO</a><a href="/pernambuco/">PERNAMBUCO</a><a href="/tecnologia/">TECNOLOGIA</a></nav>
 <div class="ticker"><b>EM DESTAQUE</b><span>As notícias mais importantes, com informação e contexto.</span></div>
 <main id="main-content" tabindex="-1"><div id="inicio">
 <section class="hero" aria-label="Manchetes principais">
@@ -48,7 +48,7 @@ const now=new Date();document.getElementById('today').textContent=new Intl.DateT
 const links=[...document.querySelectorAll('[data-filter]')],empty=document.getElementById('empty');let activeCategory='Todas';
 function applyFilters(){const cards=[...document.querySelectorAll('#news-grid .news-card')],term=(document.getElementById('news-search')?.value||'').trim().toLocaleLowerCase('pt-BR');let shown=0;cards.forEach(card=>{const categoryOk=activeCategory==='Todas'||(card.dataset.cat||'').toLocaleLowerCase('pt-BR')===activeCategory.toLocaleLowerCase('pt-BR');const textOk=!term||card.textContent.toLocaleLowerCase('pt-BR').includes(term);const visible=categoryOk&&textOk;card.hidden=!visible;if(visible)shown++});empty.style.display=shown?'none':'block';empty.textContent=term?'Nenhuma notícia corresponde à sua busca.':'Ainda não há matérias publicadas nesta editoria.';links.forEach(a=>a.classList.toggle('active',a.dataset.filter===activeCategory))}
 function filter(cat){activeCategory=cat;applyFilters();if(cat==='Pernambuco')document.getElementById('pernambuco').scrollIntoView({behavior:'smooth',block:'start'});else document.getElementById('ultimas').scrollIntoView({behavior:'smooth',block:'start'})}
-links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();filter(a.dataset.filter)}));document.getElementById('reset-filter').addEventListener('click',e=>{e.preventDefault();document.getElementById('news-search').value='';filter('Todas')});document.getElementById('news-search').addEventListener('input',applyFilters);
+document.getElementById('reset-filter').addEventListener('click',e=>{e.preventDefault();document.getElementById('news-search').value='';filter('Todas')});document.getElementById('news-search').addEventListener('input',applyFilters);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
 <script>
