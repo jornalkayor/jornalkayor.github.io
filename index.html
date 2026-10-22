@@ -186,6 +186,30 @@ a,button,input,select,textarea{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){
   #kayor-theme-toggle{transition:none!important}
 }
+/* Kayor: acabamento visual consistente no modo escuro */
+:root[data-theme="dark"] .lead-image,
+:root[data-theme="dark"] .thumb{
+  background:transparent!important;
+}
+:root[data-theme="dark"] footer{
+  background:#101720!important;
+  color:#a7b5c6!important;
+}
+:root[data-theme="dark"] .footer-brand,
+:root[data-theme="dark"] .footer-brand img{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+:root[data-theme="dark"] .notice{
+  background:transparent!important;
+  color:#a7b5c6!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:12px 0 20px!important;
+}
+
 </style>
 </head>
 <body>
@@ -303,27 +327,3 @@ const sideArticles=articles.filter(a=>a.id!==lead.id).slice(0,3);if(!sideArticle
 
 </body>
 </html>
-
-/* Kayor: acabamento visual consistente no modo escuro */
-:root[data-theme="dark"] .lead-image,
-:root[data-theme="dark"] .thumb{
-  background:transparent!important;
-}
-:root[data-theme="dark"] footer{
-  background:#101720!important;
-  color:#a7b5c6!important;
-}
-:root[data-theme="dark"] .footer-brand,
-:root[data-theme="dark"] .footer-brand img{
-  background:transparent!important;
-  box-shadow:none!important;
-  border:0!important;
-}
-:root[data-theme="dark"] .notice{
-  background:transparent!important;
-  color:#a7b5c6!important;
-  border:0!important;
-  box-shadow:none!important;
-  padding:0!important;
-  margin:12px 0 20px!important;
-}
