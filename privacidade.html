@@ -32,6 +32,64 @@ img,svg,video,iframe{max-width:100%}
  h2{margin-top:26px}
 }
 
+
+/* Kayor theme toggle: dark mode */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --navy:#d7e8ff;--blue:#7bb8f0;--ink:#e6edf5;--muted:#a7b5c6;
+  --line:#344255;--pale:#172231;--white:#101720;
+}
+:root[data-theme="dark"] body{background:#101720!important;color:#e6edf5!important}
+:root[data-theme="dark"] header,:root[data-theme="dark"] .masthead,:root[data-theme="dark"] main,
+:root[data-theme="dark"] .container,:root[data-theme="dark"] .article,
+:root[data-theme="dark"] .content{color:inherit}
+:root[data-theme="dark"] .datebar,:root[data-theme="dark"] .top,
+:root[data-theme="dark"] footer,:root[data-theme="dark"] .listen-tools,
+:root[data-theme="dark"] .local,:root[data-theme="dark"] .newsletter,
+:root[data-theme="dark"] .admin-nav,:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .help{
+  background:#172231!important;color:#dce6f2!important;border-color:#344255!important
+}
+:root[data-theme="dark"] .panel,:root[data-theme="dark"] .login,
+:root[data-theme="dark"] .editor-shell,:root[data-theme="dark"] .ql-container.ql-snow,
+:root[data-theme="dark"] .ql-toolbar.ql-snow{background:#172231!important;color:#e6edf5!important;border-color:#344255!important}
+:root[data-theme="dark"] h1,:root[data-theme="dark"] h2,:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,:root[data-theme="dark"] .lead-caption h1,
+:root[data-theme="dark"] .side-heading,:root[data-theme="dark"] .section-head h2,
+:root[data-theme="dark"] .editoria-intro h1,:root[data-theme="dark"] .article h1,
+:root[data-theme="dark"] .bodycopy h2,:root[data-theme="dark"] .related-item a,
+:root[data-theme="dark"] .login h1,:root[data-theme="dark"] .section-title{color:#d7e8ff!important}
+:root[data-theme="dark"] p,:root[data-theme="dark"] li,
+:root[data-theme="dark"] .summary,:root[data-theme="dark"] .caption,
+:root[data-theme="dark"] .muted,:root[data-theme="dark"] .tagline,
+:root[data-theme="dark"] .byline,:root[data-theme="dark"] .editoria-intro p{color:#b7c4d4}
+:root[data-theme="dark"] .nav{color:#d7e8ff;border-color:#344255}
+:root[data-theme="dark"] .news-card,:root[data-theme="dark"] .side article,
+:root[data-theme="dark"] .related-item,:root[data-theme="dark"] .meta,
+:root[data-theme="dark"] .section,:root[data-theme="dark"] .nav,
+:root[data-theme="dark"] .editoria-intro{border-color:#344255}
+:root[data-theme="dark"] input,:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select,:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field select,:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .listen-controls button,:root[data-theme="dark"] .listen-controls select,
+:root[data-theme="dark"] .sharebar button,:root[data-theme="dark"] .sharebar a{
+  background:#101720!important;color:#e6edf5!important;border-color:#46566b!important
+}
+:root[data-theme="dark"] .btn.secondary{background:#29384a!important;color:#e6edf5!important}
+:root[data-theme="dark"] .pill{background:#29384a;color:#dce6f2}
+:root[data-theme="dark"] .lead-image,:root[data-theme="dark"] .thumb,
+:root[data-theme="dark"] .cover{background-color:#202c3b}
+:root[data-theme="dark"] .notice{background:#332a18!important;color:#ffe2a8!important;border-color:#a87820}
+:root[data-theme="dark"] .ql-editor{color:#e6edf5}
+#kayor-theme-toggle{
+ position:fixed;right:18px;bottom:18px;z-index:10000;display:inline-flex;align-items:center;gap:8px;
+ border:1px solid #60758e;border-radius:999px;padding:10px 14px;background:#12345a;color:#fff;
+ box-shadow:0 4px 18px #0003;font:700 12px/1.2 Arial,Helvetica,sans-serif;cursor:pointer
+}
+#kayor-theme-toggle:focus-visible{outline:3px solid #7bb8f0;outline-offset:3px}
+:root[data-theme="dark"] #kayor-theme-toggle{background:#e6edf5;color:#101720;border-color:#e6edf5}
+@media(max-width:480px){#kayor-theme-toggle{right:12px;bottom:12px;padding:10px 12px}}
+
 </style></head>
 <body><div class="top"><div class="container">KAYOR · PRIVACIDADE</div></div><header class="container masthead"><a class="brand" href="./" aria-label="Kayor — página inicial"><img src="Logos/kayor_horizontal.png" alt="Kayor"></a></header><div class="container"><nav class="nav"><a href="./">← VOLTAR À PÁGINA INICIAL</a></nav></div>
 <main class="container"><article class="content"><div class="eyebrow">Privacidade</div><h1>Como o Kayor trata dados</h1>
@@ -42,4 +100,36 @@ img,svg,video,iframe{max-width:100%}
 <h2>Newsletter e formulários</h2><p>Ao se inscrever na newsletter, você fornece seu endereço de e-mail e registra consentimento explícito para receber comunicações editoriais do Kayor. Esses dados são armazenados no Supabase, serviço usado pelo site, e ficam acessíveis à administração autorizada para gerenciar inscrições. O endereço não é exibido publicamente nem deve ser usado para finalidades incompatíveis com a newsletter.</p><p>O cadastro não deve ser considerado confirmação de que campanhas por e-mail já estão sendo enviadas: o sistema de inscrição está ativo, mas o serviço de envio periódico ainda depende da configuração de um provedor de e-mail. Após a inscrição, o site disponibiliza um link individual para cancelamento. A equipe editorial também pode registrar o descadastro no painel administrativo.</p><p>Para solicitar correção ou exclusão de dados, entre em contato com a redação pelos canais oficiais do Kayor. Os dados de inscrição serão mantidos enquanto a inscrição estiver ativa ou pelo período necessário para registrar e respeitar o descadastro.</p>
 <h2>Serviços de terceiros</h2><p>Bibliotecas externas e imagens hospedadas por terceiros podem ser carregadas pelo navegador e estar sujeitas às políticas desses provedores.</p>
 <h2>Atualizações</h2><p>Esta política será revisada quando o funcionamento do site mudar. Os canais oficiais para solicitações relacionadas à privacidade serão publicados aqui quando estiverem disponíveis.</p></article></main>
-<footer><div class="container">© <span id="year"></span> Kayor · Jornalismo com contexto.</div></footer><script>document.getElementById("year").textContent=new Date().getFullYear()</script></body></html>
+<footer><div class="container">© <span id="year"></span> Kayor · Jornalismo com contexto.</div></footer><script>document.getElementById("year").textContent=new Date().getFullYear()</script>
+<script id="kayor-theme-controller">
+(()=> {
+ const root=document.documentElement, key="kayor-theme";
+ let saved="light";
+ try { saved=localStorage.getItem(key)||"light"; } catch(_) {}
+ const apply=theme=>{
+   const dark=theme==="dark";
+   root.setAttribute("data-theme",dark?"dark":"light");
+   const button=document.getElementById("kayor-theme-toggle");
+   if(button){
+     button.setAttribute("aria-pressed",String(dark));
+     button.setAttribute("aria-label",dark?"Ativar modo claro":"Ativar modo escuro");
+     button.innerHTML=dark?"☀️ <span>Modo claro</span>":"🌙 <span>Modo escuro</span>";
+   }
+ };
+ apply(saved==="dark"?"dark":"light");
+ const addButton=()=>{
+   if(document.getElementById("kayor-theme-toggle"))return;
+   const button=document.createElement("button");
+   button.id="kayor-theme-toggle";button.type="button";
+   button.addEventListener("click",()=>{
+     const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+     apply(next);
+     try{localStorage.setItem(key,next)}catch(_){}
+   });
+   document.body.appendChild(button);apply(root.getAttribute("data-theme")==="dark"?"dark":"light");
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",addButton,{once:true});else addButton();
+})();
+</script>
+
+</body></html>
