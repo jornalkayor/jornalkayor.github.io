@@ -59,7 +59,7 @@ const SUPABASE_URL="https://fcgjtxfrgezbxfdxtouf.supabase.co";
 const SUPABASE_KEY="sb_publishable_edom7QrsN88KKo8JdwpP5w_ef22VbSv";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
-const quill=new Quill("#editor",{theme:"snow",modules:{toolbar:{container:"#toolbar",handlers:{image:handleImage}}},placeholder:"Comece a escrever a matéria…"});
+let quill=null;try{if(typeof Quill!=="undefined"){quill=new Quill("#editor",{theme:"snow",modules:{toolbar:{container:"#toolbar",handlers:{image:handleImage}}},placeholder:"Comece a escrever a matéria…"});}else{console.error("Quill não carregou; o login do painel continuará disponível.");}}catch(err){console.error("Falha ao inicializar o editor Quill:",err);}
 let currentSession=null,articles=[];
 function message(id,text,kind=""){const el=$(id);el.textContent=text;el.className="status "+kind}
 function slugify(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
