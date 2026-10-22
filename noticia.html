@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12345a">
+<meta name="description" content="Leia a matéria no Kayor, jornalismo com contexto.">
+<title>Matéria | Kayor</title>
+<link rel="icon" href="Logos/kayor_logo_final.png" type="image/png">
+<style>
+:root{--navy:#12345a;--blue:#2875b9;--ink:#252b32;--muted:#687789;--line:#dfe5ec;--pale:#f3f6f9;--white:#fff}*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.7}.container{width:min(900px,calc(100% - 36px));margin:auto}a{color:inherit;text-decoration:none}.top{background:var(--pale);border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);padding:8px 0}.masthead{padding:20px 0 14px}.brand img{width:min(230px,70vw);height:66px;object-fit:contain;object-position:left center}.nav{border-top:1px solid var(--line);border-bottom:3px solid var(--navy);padding:12px 0;color:var(--navy);font-size:12px;font-weight:800}.article{max-width:760px;margin:35px auto 55px}.kicker{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}.article h1{color:var(--navy);font-size:clamp(32px,5vw,48px);line-height:1.12;letter-spacing:-1px;margin:12px 0}.summary{font-size:19px;color:#5e6b78;line-height:1.5;margin:15px 0}.meta{font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);padding:12px 0 18px}.cover{height:clamp(210px,40vw,420px);background:#e5ebf1 center/cover no-repeat;margin:22px 0 8px}.caption{font-size:11px;color:var(--muted)}.notice{background:#fff7e6;border-left:4px solid #d99b20;padding:13px 16px;margin:24px 0;font-size:13px;color:#694b12}.bodycopy{font-size:18px;line-height:1.8}.bodycopy p{margin:0 0 20px}.bodycopy h2{color:var(--navy);font-size:25px;line-height:1.25;margin-top:32px}.back{display:inline-block;color:var(--blue);font-weight:800;font-size:13px;margin:8px 0 30px}footer{background:var(--pale);border-top:1px solid var(--line);padding:22px 0;font-size:12px;color:var(--muted)}@media(max-width:600px){.article{margin-top:24px}.summary{font-size:17px}.bodycopy{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="container">KAYOR · JORNALISMO COM CONTEXTO</div></div>
+<header class="container masthead"><a class="brand" href="./" aria-label="Kayor — página inicial"><img src="Logos/kayor_horizontal.png" alt="Kayor" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/CaioBarretor/portif-lio-site-jornal/main/Logos/kayor_horizontal.png'"></a></header>
+<div class="container"><nav class="nav"><a href="./">← VOLTAR À PÁGINA INICIAL</a></nav></div>
+<main class="container">
+<article class="article">
+<div class="kicker" id="category">KAYOR · MATÉRIA</div>
+<h1 id="headline">Matéria não encontrada</h1>
+<p class="summary" id="summary">Volte à página inicial para escolher uma matéria.</p>
+<div class="meta" id="meta">Redação Kayor</div>
+<div class="cover" id="cover" role="img" aria-label="Imagem ilustrativa da matéria"></div>
+<div class="caption">Imagem ilustrativa. A legenda e os créditos devem ser substituídos pela informação correta antes da publicação.</div>
+<div class="notice"><strong>Conteúdo demonstrativo:</strong> esta página faz parte da estrutura inicial do site. O texto abaixo é um modelo editorial, não uma notícia apurada. Não publique como notícia real sem checagem, fontes e revisão.</div>
+<div class="bodycopy" id="bodycopy"><p>Esta matéria ainda não foi preenchida pela redação.</p></div>
+<a class="back" href="./">← Voltar para as notícias</a>
+</article>
+</main>
+<footer><div class="container">© <span id="year"></span> Kayor · Informação com contexto.</div></footer>
+<script>
+const stories={
+"politica-decisoes-pais":{cat:"Política · Análise",title:"As decisões que movimentam o país e impactam a vida dos brasileiros",summary:"Entenda os principais temas em debate, os interesses envolvidos e como eles podem afetar a sociedade.",img:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=85",read:"8 min"},
+"indicadores-economia":{cat:"Economia",title:"Indicadores econômicos entram no radar de empresas e consumidores",summary:"Um guia para contextualizar indicadores econômicos e compreender por que eles importam.",img:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85",read:"6 min"},
+"servicos-publicos":{cat:"Brasil",title:"Serviços públicos: o que está em discussão e quais são os próximos passos",summary:"Uma estrutura de matéria para explicar decisões públicas, seus responsáveis e os possíveis impactos.",img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85",read:"5 min"},
+"acontecimentos-internacionais":{cat:"Mundo",title:"Os acontecimentos internacionais que ajudam a explicar o cenário global",summary:"Contexto e perguntas essenciais para acompanhar temas internacionais além das manchetes.",img:"https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=85",read:"4 min"},
+"infraestrutura-mobilidade":{cat:"Brasil",title:"Infraestrutura e mobilidade voltam ao centro do debate nacional",summary:"Uma pauta demonstrativa sobre como decisões de infraestrutura podem afetar deslocamentos e serviços.",img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85",read:"5 min"},
+"privacidade-digital":{cat:"Tecnologia",title:"Privacidade digital ganha espaço nas discussões sobre tecnologia",summary:"Entenda os conceitos que ajudam a avaliar debates sobre dados pessoais e segurança digital.",img:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",read:"4 min"},
+"pequenos-negocios":{cat:"Economia",title:"Pequenos negócios enfrentam desafios para crescer no país",summary:"Uma estrutura de reportagem sobre crédito, custos, gestão e ambiente de negócios.",img:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85",read:"6 min"},
+"acontecimentos-mundo":{cat:"Mundo",title:"O que observar nos principais acontecimentos internacionais",summary:"Um modelo para organizar contexto, atores envolvidos e consequências de acontecimentos globais.",img:"https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=85",read:"4 min"},
+"congresso-pautas":{cat:"Política",title:"Congresso: pautas em discussão e os próximos passos",summary:"Uma pauta demonstrativa para acompanhar propostas, tramitação e posicionamentos públicos.",img:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=85",read:"5 min"},
+"trabalho-renda":{cat:"Cotidiano",title:"Trabalho e renda: temas que afetam a rotina dos brasileiros",summary:"Uma estrutura de matéria para contextualizar mudanças no mundo do trabalho e seus efeitos.",img:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",read:"3 min"}
+};
+const id=new URLSearchParams(location.search).get("id"),s=stories[id];
+document.getElementById("year").textContent=new Date().getFullYear();
+if(s){document.title=s.title+" | Kayor";document.querySelector('meta[name="description"]').content=s.summary;document.getElementById("category").textContent=s.cat;document.getElementById("headline").textContent=s.title;document.getElementById("summary").textContent=s.summary;document.getElementById("meta").textContent="Redação Kayor · "+s.read+" de leitura · Texto demonstrativo";document.getElementById("cover").style.backgroundImage="url('"+s.img+"')";document.getElementById("bodycopy").innerHTML='<p>Esta página demonstra a estrutura editorial de uma matéria do Kayor. Antes de publicar, a redação deve inserir informações verificadas, datas, documentos e declarações atribuídas corretamente.</p><h2>O que é preciso saber</h2><p>Apresente aqui os fatos principais com linguagem clara, distinguindo informação confirmada, contexto e análise. Cada afirmação factual deve ser sustentada por apuração e fontes identificáveis.</p><h2>Contexto e próximos passos</h2><p>Explique o histórico do tema, quem são os atores envolvidos e o que acontece a seguir. Inclua links para documentos originais e outras matérias relacionadas quando disponíveis.</p><p><strong>Fontes:</strong> adicionar as fontes consultadas e os respectivos links antes da publicação.</p>';}
+</script>
+</body>
+</html>
