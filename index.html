@@ -211,16 +211,13 @@ a,button,input,select,textarea{touch-action:manipulation}
 }
 
 
-/* Imagens editoriais: remover moldura, brilho e fundo do elemento e do contêiner */
-.lead,
-.lead-image,
-.thumb{
+/* Kayor: brilho azul editorial padronizado em todas as imagens */
+.lead{
+  padding:0!important;
   border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
   background:transparent!important;
+  box-shadow:none!important;
 }
-.lead{padding:0!important}
 img.lead-image,
 img.thumb{
   display:block!important;
@@ -228,16 +225,21 @@ img.thumb{
   max-width:100%!important;
   height:auto!important;
   margin:0 0 12px!important;
+  border:0!important;
+  outline:0!important;
   border-radius:0!important;
+  background:transparent!important;
   filter:none!important;
   object-fit:cover;
   object-position:center;
+  box-shadow:0 0 8px rgba(40,117,185,.38),0 0 20px rgba(40,117,185,.30),0 0 34px rgba(40,117,185,.18)!important;
 }
 @media(max-width:760px){
   img.lead-image,img.thumb{
     width:100%!important;
     max-width:100%!important;
     height:auto!important;
+    box-shadow:0 0 6px rgba(40,117,185,.36),0 0 15px rgba(40,117,185,.24)!important;
   }
 }
 </style>
