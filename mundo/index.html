@@ -173,7 +173,7 @@ const grid=document.getElementById("news-grid");grid.replaceChildren();
 const fmt=d=>d?new Intl.DateTimeFormat("pt-BR",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(d)):"";
 const card=a=>{
 const article=document.createElement("article");article.className="news-card";article.dataset.cat=a.category||"Brasil";
-if(a.cover_image_url){const im=document.createElement("div");im.className="thumb";im.style.backgroundImage="url("+JSON.stringify(a.cover_image_url)+")";im.setAttribute("role","img");im.setAttribute("aria-label",a.cover_alt||a.title);article.append(im)}
+if(a.cover_image_url){const im=document.createElement("img");im.className="thumb";im.src=a.cover_image_url;im.alt=a.cover_alt||a.title;im.width=1170;im.height=700;im.loading="lazy";im.decoding="async";im.addEventListener("error",()=>{im.hidden=true},{once:true});article.append(im)}
 const cat=document.createElement("div");cat.className="kicker";cat.textContent=a.category||"Brasil";
 const h=document.createElement("h3"),link=document.createElement("a");link.href="/noticia.html?id="+encodeURIComponent(a.slug);link.textContent=a.title;h.append(link);
 const summary=document.createElement("p");summary.className="summary";summary.textContent=a.subtitle||"Leia a matéria completa no Kayor.";
