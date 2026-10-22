@@ -44,5 +44,38 @@ const links=[...document.querySelectorAll('[data-filter]')],cards=[...document.q
 function filter(cat){let shown=0;cards.forEach(card=>{const visible=cat==='Todas'||card.dataset.cat===cat;card.hidden=!visible;if(visible)shown++});empty.style.display=shown?'none':'block';links.forEach(a=>a.classList.toggle('active',a.dataset.filter===cat));if(cat==='Pernambuco')document.getElementById('pernambuco').scrollIntoView({behavior:'smooth',block:'start'});else document.getElementById('ultimas').scrollIntoView({behavior:'smooth',block:'start'})}
 links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();filter(a.dataset.filter)}));document.getElementById('reset-filter').addEventListener('click',e=>{e.preventDefault();filter('Todas')});document.getElementById('newsletter').addEventListener('submit',e=>{e.preventDefault();document.getElementById('form-msg').textContent='Cadastro demonstrativo: ainda não conectado a uma newsletter.'});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
+<script>
+(async()=>{
+try{
+const client=window.supabase.createClient("https://fcgjtxfrgezbxfdxtouf.supabase.co","sb_publishable_edom7QrsN88KKo8JdwpP5w_ef22VbSv");
+const {data:articles,error}=await client.from("kayor_articles").select("id,title,slug,subtitle,category,author,cover_image_url,cover_alt,featured,published_at,updated_at").eq("status","published").order("published_at",{ascending:false}).limit(30);
+if(error||!articles||!articles.length)return;
+const grid=document.getElementById("news-grid");grid.replaceChildren();
+const fmt=d=>d?new Intl.DateTimeFormat("pt-BR",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(d)):"";
+const card=a=>{
+const article=document.createElement("article");article.className="news-card";article.dataset.cat=a.category||"Brasil";
+if(a.cover_image_url){const im=document.createElement("div");im.className="thumb";im.style.backgroundImage="url("+JSON.stringify(a.cover_image_url)+")";im.setAttribute("role","img");im.setAttribute("aria-label",a.cover_alt||a.title);article.append(im)}
+const cat=document.createElement("div");cat.className="kicker";cat.textContent=a.category||"Brasil";
+const h=document.createElement("h3"),link=document.createElement("a");link.href="noticia.html?id="+encodeURIComponent(a.slug);link.textContent=a.title;h.append(link);
+const summary=document.createElement("p");summary.className="summary";summary.textContent=a.subtitle||"Leia a matéria completa no Kayor.";
+const meta=document.createElement("div");meta.className="byline";meta.textContent=(a.author||"Redação Kayor").toUpperCase()+(a.published_at?" · "+fmt(a.published_at).toUpperCase():"");
+article.append(cat,h,summary,meta);return article;
+};
+articles.forEach(a=>grid.append(card(a)));
+document.querySelector(".notice").textContent="As matérias exibidas são conteúdo publicado pela redação do Kayor. Consulte as fontes indicadas em cada reportagem.";
+const lead=articles.find(a=>a.featured)||articles[0];
+if(lead){
+const leadTitle=document.querySelector(".lead-caption h1");leadTitle.replaceChildren();const l=document.createElement("a");l.href="noticia.html?id="+encodeURIComponent(lead.slug);l.textContent=lead.title;leadTitle.append(l);
+document.querySelector(".lead-caption .kicker").textContent=(lead.category||"Destaque").toUpperCase();
+document.querySelector(".lead-caption .summary").textContent=lead.subtitle||"Leia a matéria completa no Kayor.";
+document.querySelector(".lead-caption .byline").textContent=(lead.author||"REDAÇÃO KAYOR").toUpperCase()+(lead.published_at?" · "+fmt(lead.published_at).toUpperCase():"");
+if(lead.cover_image_url){const cover=document.querySelector(".lead-image");cover.style.backgroundImage="url("+JSON.stringify(lead.cover_image_url)+")";cover.setAttribute("aria-label",lead.cover_alt||lead.title)}
+}
+const side=document.querySelector(".side");side.replaceChildren();const sh=document.createElement("div");sh.className="side-heading";sh.textContent="Mais importantes";side.append(sh);
+articles.filter(a=>a.id!==lead.id).slice(0,3).forEach(a=>{const ar=document.createElement("article"),k=document.createElement("div"),h=document.createElement("h2"),l=document.createElement("a"),p=document.createElement("p");k.className="kicker";k.textContent=(a.category||"Brasil").toUpperCase();l.href="noticia.html?id="+encodeURIComponent(a.slug);l.textContent=a.title;h.append(l);p.className="summary";p.textContent=a.subtitle||"Leia a matéria completa.";ar.append(k,h,p);side.append(ar)});
+}catch(e){console.error("Kayor: falha ao carregar matérias publicadas",e)}
+})();
+</script>
 </body>
 </html>
