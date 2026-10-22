@@ -211,20 +211,36 @@ a,button,input,select,textarea{touch-action:manipulation}
 }
 
 
-/* Correção definitiva das imagens: não reservar faixas laterais/superiores */
-.lead-image,.thumb{
-  display:block!important;width:100%!important;max-width:100%;
-  aspect-ratio:1170/700;object-fit:cover!important;object-position:center;
-  background:transparent!important;border:0!important;outline:0!important;
-  box-shadow:none!important;
+/* Imagens editoriais: dimensionamento único e sem moldura artificial */
+.lead-image,
+.thumb{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  margin:0 0 12px;
+  border:0;
+  outline:0;
+  box-shadow:none;
+  background:transparent;
+}
+.lead-image{
+  aspect-ratio:1170 / 700;
+  object-fit:cover;
+  object-position:center;
+}
+.thumb{
+  aspect-ratio:1170 / 700;
+  object-fit:cover;
+  object-position:center;
 }
 @media(max-width:760px){
-  .lead-image,.thumb{height:auto!important;object-fit:cover!important;background:transparent!important}
+  .lead-image,.thumb{
+    width:100%;
+    max-width:100%;
+    height:auto;
+  }
 }
-@media(max-width:520px){
-  .news-card .thumb{aspect-ratio:1170/700;height:auto!important;min-height:0;object-fit:cover!important}
-}
-
 </style>
 </head>
 <body>
@@ -247,7 +263,7 @@ a,button,input,select,textarea{touch-action:manipulation}
 <div class="ticker"><b>EM DESTAQUE</b><span>As notícias mais importantes, com informação e contexto.</span></div>
 <main id="main-content" tabindex="-1"><div id="inicio">
 <section class="hero" aria-label="Manchetes principais">
-<article class="lead"><div class="lead-image" role="img" aria-label="Destaque editorial Kayor"></div><div class="lead-caption"><div class="kicker">DESTAQUE EDITORIAL</div><h1><a href="#ultimas">Acompanhe as principais notícias no Kayor</a></h1><p class="summary">Informação, contexto e responsabilidade editorial. As manchetes publicadas pela redação aparecem aqui.</p><div class="byline">REDAÇÃO KAYOR</div></div></article>
+<article class="lead"><img class="lead-image" alt="Destaque editorial Kayor" hidden><div class="lead-caption"><div class="kicker">DESTAQUE EDITORIAL</div><h1><a href="#ultimas">Acompanhe as principais notícias no Kayor</a></h1><p class="summary">Informação, contexto e responsabilidade editorial. As manchetes publicadas pela redação aparecem aqui.</p><div class="byline">REDAÇÃO KAYOR</div></div></article>
 <div class="side"><div class="side-heading">Mais importantes</div><div class="summary" id="side-empty">As matérias mais relevantes serão exibidas aqui após a publicação.</div></div>
 </section>
 <section class="section" id="ultimas"><div class="section-head"><h2>Últimas notícias</h2><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="sr-only" for="news-search">Buscar notícias</label><input id="news-search" type="search" placeholder="Buscar notícias…" style="padding:10px 12px;border:1px solid var(--line);min-width:min(260px,70vw);font:inherit;font-size:12px" autocomplete="off"><a href="#ultimas" id="reset-filter">VER TODAS →</a></div></div><div class="news-grid" id="news-grid"></div><div class="empty" id="empty">Carregando notícias publicadas…</div></section>
