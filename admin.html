@@ -33,6 +33,64 @@ a,button,input,select,textarea{touch-action:manipulation}
 @media(max-width:360px){.overview-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+
+/* Kayor theme toggle: dark mode */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --navy:#d7e8ff;--blue:#7bb8f0;--ink:#e6edf5;--muted:#a7b5c6;
+  --line:#344255;--pale:#172231;--white:#101720;
+}
+:root[data-theme="dark"] body{background:#101720!important;color:#e6edf5!important}
+:root[data-theme="dark"] header,:root[data-theme="dark"] .masthead,:root[data-theme="dark"] main,
+:root[data-theme="dark"] .container,:root[data-theme="dark"] .article,
+:root[data-theme="dark"] .content{color:inherit}
+:root[data-theme="dark"] .datebar,:root[data-theme="dark"] .top,
+:root[data-theme="dark"] footer,:root[data-theme="dark"] .listen-tools,
+:root[data-theme="dark"] .local,:root[data-theme="dark"] .newsletter,
+:root[data-theme="dark"] .admin-nav,:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .help{
+  background:#172231!important;color:#dce6f2!important;border-color:#344255!important
+}
+:root[data-theme="dark"] .panel,:root[data-theme="dark"] .login,
+:root[data-theme="dark"] .editor-shell,:root[data-theme="dark"] .ql-container.ql-snow,
+:root[data-theme="dark"] .ql-toolbar.ql-snow{background:#172231!important;color:#e6edf5!important;border-color:#344255!important}
+:root[data-theme="dark"] h1,:root[data-theme="dark"] h2,:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,:root[data-theme="dark"] .lead-caption h1,
+:root[data-theme="dark"] .side-heading,:root[data-theme="dark"] .section-head h2,
+:root[data-theme="dark"] .editoria-intro h1,:root[data-theme="dark"] .article h1,
+:root[data-theme="dark"] .bodycopy h2,:root[data-theme="dark"] .related-item a,
+:root[data-theme="dark"] .login h1,:root[data-theme="dark"] .section-title{color:#d7e8ff!important}
+:root[data-theme="dark"] p,:root[data-theme="dark"] li,
+:root[data-theme="dark"] .summary,:root[data-theme="dark"] .caption,
+:root[data-theme="dark"] .muted,:root[data-theme="dark"] .tagline,
+:root[data-theme="dark"] .byline,:root[data-theme="dark"] .editoria-intro p{color:#b7c4d4}
+:root[data-theme="dark"] .nav{color:#d7e8ff;border-color:#344255}
+:root[data-theme="dark"] .news-card,:root[data-theme="dark"] .side article,
+:root[data-theme="dark"] .related-item,:root[data-theme="dark"] .meta,
+:root[data-theme="dark"] .section,:root[data-theme="dark"] .nav,
+:root[data-theme="dark"] .editoria-intro{border-color:#344255}
+:root[data-theme="dark"] input,:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select,:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field select,:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .listen-controls button,:root[data-theme="dark"] .listen-controls select,
+:root[data-theme="dark"] .sharebar button,:root[data-theme="dark"] .sharebar a{
+  background:#101720!important;color:#e6edf5!important;border-color:#46566b!important
+}
+:root[data-theme="dark"] .btn.secondary{background:#29384a!important;color:#e6edf5!important}
+:root[data-theme="dark"] .pill{background:#29384a;color:#dce6f2}
+:root[data-theme="dark"] .lead-image,:root[data-theme="dark"] .thumb,
+:root[data-theme="dark"] .cover{background-color:#202c3b}
+:root[data-theme="dark"] .notice{background:#332a18!important;color:#ffe2a8!important;border-color:#a87820}
+:root[data-theme="dark"] .ql-editor{color:#e6edf5}
+#kayor-theme-toggle{
+ position:fixed;right:18px;bottom:18px;z-index:10000;display:inline-flex;align-items:center;gap:8px;
+ border:1px solid #60758e;border-radius:999px;padding:10px 14px;background:#12345a;color:#fff;
+ box-shadow:0 4px 18px #0003;font:700 12px/1.2 Arial,Helvetica,sans-serif;cursor:pointer
+}
+#kayor-theme-toggle:focus-visible{outline:3px solid #7bb8f0;outline-offset:3px}
+:root[data-theme="dark"] #kayor-theme-toggle{background:#e6edf5;color:#101720;border-color:#e6edf5}
+@media(max-width:480px){#kayor-theme-toggle{right:12px;bottom:12px;padding:10px 12px}}
+
 </style>
 </head>
 <body>
@@ -127,4 +185,36 @@ function showRecoveryScreen(){
 if(recoveryMode){showRecoveryScreen();db.auth.onAuthStateChange((_event,session)=>{currentSession=session;});}else{db.auth.onAuthStateChange((event,session)=>{currentSession=session;if(event==="SIGNED_IN"||event==="SIGNED_OUT")showApp()});showApp();}
 </script>
 <script>(()=>{const root=document.documentElement,$=id=>document.getElementById(id),toggle=$("a11y-toggle"),panel=$("a11y-panel");let font=100;try{const s=JSON.parse(localStorage.getItem("kayor-a11y")||"{}");font=Math.max(85,Math.min(140,Number(s.font)||100));root.classList.toggle("a11y-contrast",!!s.contrast);root.classList.toggle("a11y-underline",!!s.underline);root.classList.toggle("a11y-reduced-motion",!!s.motion);document.body.style.fontSize=font+"%";for(const [k,id,label,cls] of [["contrast","a11y-contrast","Alto contraste","a11y-contrast"],["underline","a11y-underline","Sublinhar links","a11y-underline"],["motion","a11y-motion","Reduzir animações","a11y-reduced-motion"]]){$(id).setAttribute("aria-pressed",String(!!s[k]));$(id).textContent=label+": "+(s[k]?"ligado":"desligado")}}catch{}const save=()=>{try{localStorage.setItem("kayor-a11y",JSON.stringify({font,contrast:root.classList.contains("a11y-contrast"),underline:root.classList.contains("a11y-underline"),motion:root.classList.contains("a11y-reduced-motion")}))}catch{}};const setFont=n=>{font=Math.max(85,Math.min(140,n));document.body.style.fontSize=font+"%";save()};toggle.addEventListener("click",()=>{panel.hidden=!panel.hidden;toggle.setAttribute("aria-expanded",String(!panel.hidden));if(!panel.hidden)panel.querySelector("button")?.focus()});$("a11y-close").addEventListener("click",()=>{panel.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus()});$("a11y-font-up").addEventListener("click",()=>setFont(font+10));$("a11y-font-down").addEventListener("click",()=>setFont(font-10));$("a11y-font-reset").addEventListener("click",()=>setFont(100));[["a11y-contrast","a11y-contrast","Alto contraste"],["a11y-underline","a11y-underline","Sublinhar links"],["a11y-motion","a11y-reduced-motion","Reduzir animações"]].forEach(([id,cls,label])=>$(id).addEventListener("click",()=>{root.classList.toggle(cls);const on=root.classList.contains(cls);$(id).setAttribute("aria-pressed",String(on));$(id).textContent=label+": "+(on?"ligado":"desligado");save()}));document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden){panel.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus()}})})();</script>
+
+<script id="kayor-theme-controller">
+(()=> {
+ const root=document.documentElement, key="kayor-theme";
+ let saved="light";
+ try { saved=localStorage.getItem(key)||"light"; } catch(_) {}
+ const apply=theme=>{
+   const dark=theme==="dark";
+   root.setAttribute("data-theme",dark?"dark":"light");
+   const button=document.getElementById("kayor-theme-toggle");
+   if(button){
+     button.setAttribute("aria-pressed",String(dark));
+     button.setAttribute("aria-label",dark?"Ativar modo claro":"Ativar modo escuro");
+     button.innerHTML=dark?"☀️ <span>Modo claro</span>":"🌙 <span>Modo escuro</span>";
+   }
+ };
+ apply(saved==="dark"?"dark":"light");
+ const addButton=()=>{
+   if(document.getElementById("kayor-theme-toggle"))return;
+   const button=document.createElement("button");
+   button.id="kayor-theme-toggle";button.type="button";
+   button.addEventListener("click",()=>{
+     const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+     apply(next);
+     try{localStorage.setItem(key,next)}catch(_){}
+   });
+   document.body.appendChild(button);apply(root.getAttribute("data-theme")==="dark"?"dark":"light");
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",addButton,{once:true});else addButton();
+})();
+</script>
+
 </body></html>
