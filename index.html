@@ -210,6 +210,21 @@ a,button,input,select,textarea{touch-action:manipulation}
   margin:12px 0 20px!important;
 }
 
+
+/* Correção definitiva das imagens: não reservar faixas laterais/superiores */
+.lead-image,.thumb{
+  display:block!important;width:100%!important;max-width:100%;
+  aspect-ratio:1170/700;object-fit:cover!important;object-position:center;
+  background:transparent!important;border:0!important;outline:0!important;
+  box-shadow:none!important;
+}
+@media(max-width:760px){
+  .lead-image,.thumb{height:auto!important;object-fit:cover!important;background:transparent!important}
+}
+@media(max-width:520px){
+  .news-card .thumb{aspect-ratio:1170/700;height:auto!important;min-height:0;object-fit:cover!important}
+}
+
 </style>
 </head>
 <body>
