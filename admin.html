@@ -124,6 +124,65 @@ a,button,input,select,textarea{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){
   #kayor-theme-toggle{transition:none!important}
 }
+
+/* Kayor admin: contraste e superfícies consistentes no modo escuro */
+:root[data-theme="dark"] body{background:#101720!important;color:#e6edf5!important}
+:root[data-theme="dark"] .bar{background:#0b1420!important;color:#f3f7fc!important;border-bottom:1px solid #344255}
+:root[data-theme="dark"] .wrap{color:#e6edf5}
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .login,
+:root[data-theme="dark"] .admin-nav,
+:root[data-theme="dark"] .overview-card,
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .section-banner,
+:root[data-theme="dark"] .article-row,
+:root[data-theme="dark"] .help,
+:root[data-theme="dark"] .newsletter-editor-grid>div{
+ background:#172231!important;color:#e6edf5!important;border-color:#344255!important;box-shadow:none;
+}
+:root[data-theme="dark"] .admin-nav button{color:#c7d5e5!important}
+:root[data-theme="dark"] .admin-nav button[aria-pressed="true"],
+:root[data-theme="dark"] .admin-nav button.primary{background:#263b53!important;color:#fff!important}
+:root[data-theme="dark"] .field label,
+:root[data-theme="dark"] label{color:#d5dfeb!important}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .field select{
+ background:#0f1824!important;color:#f1f5f9!important;border:1px solid #46566b!important;
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder{color:#94a3b8!important}
+:root[data-theme="dark"] .muted,
+:root[data-theme="dark"] .eyebrow{color:#a7b5c6!important}
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4{color:#d7e8ff!important}
+:root[data-theme="dark"] .btn.secondary{background:#26384c!important;color:#e6edf5!important;border-color:#46566b!important}
+:root[data-theme="dark"] .btn.primary{background:#2875b9!important;color:#fff!important}
+:root[data-theme="dark"] .btn.danger{background:#5a2228!important;color:#ffe4e6!important;border-color:#8e3a43!important}
+:root[data-theme="dark"] .pill{background:#26384c!important;color:#d7e8ff!important;border-color:#46566b!important}
+:root[data-theme="dark"] hr{border-color:#344255!important}
+:root[data-theme="dark"] .ql-toolbar.ql-snow,
+:root[data-theme="dark"] .ql-container.ql-snow{background:#172231!important;border-color:#46566b!important}
+:root[data-theme="dark"] .ql-editor{background:#101720!important;color:#e6edf5!important}
+:root[data-theme="dark"] .ql-editor.ql-blank::before{color:#94a3b8!important}
+:root[data-theme="dark"] .ql-snow .ql-stroke{stroke:#d5dfeb!important}
+:root[data-theme="dark"] .ql-snow .ql-fill{fill:#d5dfeb!important}
+:root[data-theme="dark"] .ql-snow .ql-picker{color:#d5dfeb!important}
+:root[data-theme="dark"] .ql-snow .ql-picker-options{background:#172231!important;border-color:#46566b!important}
+:root[data-theme="dark"] #newsletter-preview-panel,
+:root[data-theme="dark"] iframe{color-scheme:light}
+:root[data-theme="dark"] #kayor-recovery-screen{background:#101720!important}
+:root[data-theme="dark"] #kayor-recovery-screen section{background:#172231!important;color:#e6edf5!important;border-color:#344255!important;box-shadow:none!important}
+:root[data-theme="dark"] #kayor-recovery-screen h1{color:#d7e8ff!important}
+:root[data-theme="dark"] #kayor-theme-toggle{bottom:82px!important;right:18px!important}
+@media(max-width:600px){:root[data-theme="dark"] #kayor-theme-toggle{bottom:76px!important;right:12px!important}}
+
 </style>
 </head>
 <body>
