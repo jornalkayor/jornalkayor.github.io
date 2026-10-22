@@ -211,34 +211,33 @@ a,button,input,select,textarea{touch-action:manipulation}
 }
 
 
-/* Imagens editoriais: dimensionamento único e sem moldura artificial */
+/* Imagens editoriais: remover moldura, brilho e fundo do elemento e do contêiner */
+.lead,
 .lead-image,
 .thumb{
-  display:block;
-  width:100%;
-  max-width:100%;
-  height:auto;
-  margin:0 0 12px;
-  border:0;
-  outline:0;
-  box-shadow:none;
-  background:transparent;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
 }
-.lead-image{
-  aspect-ratio:1170 / 700;
-  object-fit:cover;
-  object-position:center;
-}
-.thumb{
-  aspect-ratio:1170 / 700;
+.lead{padding:0!important}
+img.lead-image,
+img.thumb{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  margin:0 0 12px!important;
+  border-radius:0!important;
+  filter:none!important;
   object-fit:cover;
   object-position:center;
 }
 @media(max-width:760px){
-  .lead-image,.thumb{
-    width:100%;
-    max-width:100%;
-    height:auto;
+  img.lead-image,img.thumb{
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
   }
 }
 </style>
