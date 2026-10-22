@@ -169,6 +169,87 @@ if(!relatedError&&related&&related.length){const section=$("related"),list=$("re
 }catch(e){console.error("Kayor: erro ao carregar a matéria",e)}
 })();
 </script>
+<script>
+(()=> {
+  const byId = id => document.getElementById(id);
+  const shareButton = byId("share-native");
+  const copyButton = byId("copy-link");
+  const whatsappLink = byId("share-whatsapp");
+  const status = byId("share-status");
+  if (!shareButton || !copyButton || !whatsappLink || !status) return;
+
+  const currentUrl = () => window.location.href;
+  const currentTitle = () => (byId("headline")?.textContent || document.title || "Kayor").trim();
+  const shareText = () => currentTitle() + " — " + currentUrl();
+  let statusTimer;
+  const showStatus = message => {
+    status.textContent = message;
+    window.clearTimeout(statusTimer);
+    statusTimer = window.setTimeout(() => { status.textContent = ""; }, 3500);
+  };
+
+  const updateWhatsApp = () => {
+    whatsappLink.href = "https://wa.me/?text=" + encodeURIComponent(shareText());
+  };
+  updateWhatsApp();
+
+  whatsappLink.addEventListener("click", () => {
+    updateWhatsApp();
+  });
+
+  const fallbackCopy = text => {
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    field.style.pointerEvents = "none";
+    document.body.appendChild(field);
+    field.select();
+    field.setSelectionRange(0, field.value.length);
+    let copied = false;
+    try { copied = document.execCommand("copy"); } catch (_) {}
+    field.remove();
+    return copied;
+  };
+
+  copyButton.addEventListener("click", async () => {
+    const url = currentUrl();
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+        showStatus("Link copiado!");
+      } else if (fallbackCopy(url)) {
+        showStatus("Link copiado!");
+      } else {
+        showStatus("Não foi possível copiar automaticamente. Copie o endereço do navegador.");
+      }
+    } catch (error) {
+      if (fallbackCopy(url)) showStatus("Link copiado!");
+      else showStatus("Não foi possível copiar automaticamente. Copie o endereço do navegador.");
+    }
+  });
+
+  shareButton.addEventListener("click", async () => {
+    const payload = { title: currentTitle(), text: currentTitle(), url: currentUrl() };
+    try {
+      if (typeof navigator.share === "function") {
+        await navigator.share(payload);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(payload.url);
+        showStatus("Seu navegador não oferece compartilhamento direto. Link copiado!");
+      } else if (fallbackCopy(payload.url)) {
+        showStatus("Seu navegador não oferece compartilhamento direto. Link copiado!");
+      } else {
+        showStatus("Use o botão WhatsApp ou copie o endereço do navegador.");
+      }
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+      showStatus("Não foi possível compartilhar. Tente copiar o link ou usar o WhatsApp.");
+    }
+  });
+})();
+</script>
 <script>(()=>{const root=document.documentElement;const $=id=>document.getElementById(id);const toggle=$("a11y-toggle"),panel=$("a11y-panel");if(!toggle||!panel)return;let font=100;try{const saved=JSON.parse(localStorage.getItem("kayor-a11y")||"{}");font=Math.max(85,Math.min(140,Number(saved.font)||100));root.classList.toggle("a11y-contrast",!!saved.contrast);root.classList.toggle("a11y-underline",!!saved.underline);root.classList.toggle("a11y-reduced-motion",!!saved.motion);document.body.style.setProperty("--a11y-font-scale",font/100);document.body.style.fontSize=font+"%";for(const [key,id] of [["contrast","a11y-contrast"],["underline","a11y-underline"],["motion","a11y-motion"]]){const b=$(id);b.setAttribute("aria-pressed",String(!!saved[key]));b.textContent=({contrast:"Alto contraste",underline:"Sublinhar links",motion:"Reduzir animações"})[key]+": "+(saved[key]?"ligado":"desligado")}}catch{}const save=()=>{try{const state={font,contrast:root.classList.contains("a11y-contrast"),underline:root.classList.contains("a11y-underline"),motion:root.classList.contains("a11y-reduced-motion")};localStorage.setItem("kayor-a11y",JSON.stringify(state))}catch{}};const setFont=n=>{font=Math.max(85,Math.min(140,n));document.body.style.fontSize=font+"%";save()};toggle.addEventListener("click",()=>{const open=panel.hidden;panel.hidden=!open;toggle.setAttribute("aria-expanded",String(open));if(open)panel.querySelector("button")?.focus()});$("a11y-close").addEventListener("click",()=>{panel.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus()});$("a11y-font-up").addEventListener("click",()=>setFont(font+10));$("a11y-font-down").addEventListener("click",()=>setFont(font-10));$("a11y-font-reset").addEventListener("click",()=>setFont(100));const switches=[["a11y-contrast","a11y-contrast","Alto contraste"],["a11y-underline","a11y-underline","Sublinhar links"],["a11y-motion","a11y-reduced-motion","Reduzir animações"]];switches.forEach(([id,cls,label])=>$(id).addEventListener("click",()=>{root.classList.toggle(cls);const on=root.classList.contains(cls);$(id).setAttribute("aria-pressed",String(on));$(id).textContent=label+": "+(on?"ligado":"desligado");save()}));document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden){panel.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus()}})})();</script>
 <script>(()=>{const $=id=>document.getElementById(id);const play=$("speech-play"),pause=$("speech-pause"),stop=$("speech-stop"),status=$("speech-status"),voiceSelect=$("speech-voice"),rate=$("speech-rate");if(!("speechSynthesis" in window)||!("SpeechSynthesisUtterance" in window)){status.textContent="A leitura por voz não é compatível com este navegador.";play.disabled=true;pause.disabled=true;stop.disabled=true;return}let utterance=null;const loadVoices=()=>{const all=speechSynthesis.getVoices(),pt=all.filter(v=>/^pt(-|_)/i.test(v.lang));voiceSelect.replaceChildren();const defaultOption=document.createElement("option");defaultOption.value="";defaultOption.textContent=pt.length?"Voz padrão em português":"Voz padrão do dispositivo";voiceSelect.append(defaultOption);pt.forEach(v=>{const o=document.createElement("option");o.value=v.name;o.textContent=v.name+" ("+v.lang+")";voiceSelect.append(o)})};loadVoices();speechSynthesis.addEventListener?.("voiceschanged",loadVoices);const setControls=playing=>{play.disabled=playing;pause.disabled=!playing;stop.disabled=!playing};const getText=()=>[$("headline")?.innerText,$("summary")?.innerText,$("bodycopy")?.innerText].filter(Boolean).join(". ").replace(/\s+/g," ").trim();play.addEventListener("click",()=>{const text=getText();if(!text){status.textContent="Não há texto disponível para leitura.";return}speechSynthesis.cancel();utterance=new SpeechSynthesisUtterance(text);utterance.lang="pt-BR";utterance.rate=Number(rate.value)||1;const selected=voiceSelect.value;const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>v.name===selected)||voices.find(v=>/^pt-BR$/i.test(v.lang))||voices.find(v=>/^pt/i.test(v.lang))||null;utterance.onstart=()=>{status.textContent="Lendo a notícia em voz alta.";setControls(true)};utterance.onend=()=>{status.textContent="Leitura concluída.";setControls(false)};utterance.onerror=e=>{status.textContent=e.error==="canceled"?"Leitura interrompida.":"Não foi possível reproduzir a voz neste dispositivo.";setControls(false)};speechSynthesis.speak(utterance);setControls(true);status.textContent="Preparando a leitura…"});pause.addEventListener("click",()=>{if(speechSynthesis.paused){speechSynthesis.resume();pause.textContent="Pausar";status.textContent="Leitura retomada."}else{speechSynthesis.pause();pause.textContent="Continuar";status.textContent="Leitura pausada."}});stop.addEventListener("click",()=>{speechSynthesis.cancel();setControls(false);pause.textContent="Pausar";status.textContent="Leitura parada."});window.addEventListener("beforeunload",()=>speechSynthesis.cancel())})();</script>
 </body>
