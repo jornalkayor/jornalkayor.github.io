@@ -329,8 +329,8 @@ const sideArticles=articles.filter(a=>a.id!==lead.id).slice(0,3);if(!sideArticle
 <script id="kayor-theme-controller">
 (()=> {
  const root=document.documentElement, key="kayor-theme";
- let saved="light";
- try { saved=localStorage.getItem(key)||"light"; } catch(_) {}
+ let saved="dark";
+ try { saved=localStorage.getItem(key)||"dark"; } catch(_) {}
  const apply=theme=>{
    const dark=theme==="dark";
    root.setAttribute("data-theme",dark?"dark":"light");
