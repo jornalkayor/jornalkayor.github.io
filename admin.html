@@ -213,7 +213,7 @@ a,button,input,select,textarea{touch-action:manipulation}
 <span class="ql-formats"><select class="ql-color"></select><select class="ql-background"></select><button class="ql-script" value="sub"></button><button class="ql-script" value="super"></button></span>
 <span class="ql-formats"><button class="ql-list" value="ordered"></button><button class="ql-list" value="bullet"></button><button class="ql-indent" value="-1"></button><button class="ql-indent" value="+1"></button></span>
 <span class="ql-formats"><select class="ql-align"></select><button class="ql-blockquote"></button><button class="ql-code-block"></button></span>
-<span class="ql-formats"><button class="ql-link"></button><button class="ql-image"></button><button class="ql-video"></button><button class="ql-clean"></button></span>
+<span class="ql-formats"><button class="ql-quoteMarks" type="button" aria-label="Inserir aspas tipográficas" title="Aspas tipográficas">“ ”</button><button class="ql-emDash" type="button" aria-label="Inserir travessão" title="Travessão">—</button><button class="ql-link" type="button"></button><button class="ql-image" type="button"></button><button class="ql-video" type="button"></button><button class="ql-clean" type="button"></button></span>
 </div><div id="editor"></div></div></div>
 <div class="field"><label for="sources">Fontes e documentos consultados (um link por linha)</label><textarea id="sources" rows="3" placeholder="https://site-da-fonte.gov.br/documento&#10;https://outro-veiculo.com/reportagem"></textarea></div>
 <div class="field"><label for="tags">Palavras-chave / tags (separadas por vírgula)</label><input id="tags" placeholder="eleições, Recife, economia"></div>
@@ -232,7 +232,7 @@ const SUPABASE_URL="https://fcgjtxfrgezbxfdxtouf.supabase.co";
 const SUPABASE_KEY="sb_publishable_edom7QrsN88KKo8JdwpP5w_ef22VbSv";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
-let quill=null;try{if(typeof Quill!=="undefined"){quill=new Quill("#editor",{theme:"snow",modules:{toolbar:{container:"#toolbar",handlers:{image:handleImage}}},placeholder:"Comece a escrever a matéria…"});}else{console.error("Quill não carregou; o login do painel continuará disponível.");}}catch(err){console.error("Falha ao inicializar o editor Quill:",err);}
+let quill=null;try{if(typeof Quill!=="undefined"){quill=new Quill("#editor",{theme:"snow",modules:{toolbar:{container:"#toolbar",handlers:{image:handleImage,quoteMarks:function(){const editor=this.quill;const range=editor.getSelection(true);if(!range)return;const selected=editor.getText(range.index,range.length);if(range.length){editor.insertText(range.index+range.length,"”");editor.insertText(range.index,"“");editor.setSelection(range.index,range.length+2,"user");}else{editor.insertText(range.index,"“”");editor.setSelection(range.index+1,0,"user");}},emDash:function(){const editor=this.quill;const range=editor.getSelection(true);if(!range)return;editor.insertText(range.index,"—");editor.setSelection(range.index+1,0,"user");}}}},placeholder:"Comece a escrever a matéria…"});}else{console.error("Quill não carregou; o login do painel continuará disponível.");}}catch(err){console.error("Falha ao inicializar o editor Quill:",err);}
 let currentSession=null,articles=[];
 function message(id,text,kind=""){const el=$(id);el.textContent=text;el.className="status "+kind}
 function slugify(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
