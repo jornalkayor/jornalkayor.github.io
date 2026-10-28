@@ -211,6 +211,23 @@ a,button,input,select,textarea{touch-action:manipulation}
 }
 
 
+
+/* Instagram oficial Kayor — integração editorial */
+.kayor-instagram{
+ display:inline-flex;align-items:center;justify-content:center;gap:10px;
+ margin-top:18px;padding:11px 16px;border:1px solid #315f8d;border-radius:7px;
+ background:linear-gradient(135deg,#173b62,#12345a);color:#f4f8ff!important;
+ font-size:12px;font-weight:800;letter-spacing:.45px;text-decoration:none!important;
+ box-shadow:0 0 0 1px rgba(40,117,185,.12),0 5px 16px rgba(0,0,0,.18);
+ transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.kayor-instagram svg{width:18px;height:18px;flex:0 0 18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.kayor-instagram:hover{transform:translateY(-2px);border-color:#7bb8f0;background:linear-gradient(135deg,#205586,#17436d);box-shadow:0 0 12px rgba(40,117,185,.28),0 7px 20px rgba(0,0,0,.2)}
+.kayor-instagram:focus-visible{outline:3px solid #7bb8f0;outline-offset:3px}
+:root[data-theme="light"] .kayor-instagram{background:linear-gradient(135deg,#173b62,#12345a);color:#fff!important}
+@media(max-width:520px){.kayor-instagram{min-height:44px;padding:11px 14px}}
+@media(prefers-reduced-motion:reduce){.kayor-instagram{transition:none}.kayor-instagram:hover{transform:none}}
+
 /* Kayor: brilho azul editorial padronizado em todas as imagens */
 .lead{
   padding:0!important;
@@ -272,7 +289,7 @@ img.thumb{
 <p class="notice">O Kayor publica matérias produzidas e verificadas pela redação. Informações sobre apuração, correções e contato editorial estarão disponíveis nesta página.</p>
 </div></main>
 </div>
-<footer><div class="container"><a class="footer-brand" href="./" aria-label="Kayor — início"><img src="Logos/kayor_horizontal.png" alt="Kayor"></a><div>Informação com contexto. Jornalismo com responsabilidade.</div><nav class="footer-nav" aria-label="Navegação do rodapé"><a href="#inicio">Início</a><a href="#ultimas">Brasil e política</a><a href="#ultimas">Economia</a><a href="#ultimas">Mundo</a><a href="#pernambuco">Pernambuco</a><a href="politica-editorial.html">Princípios editoriais</a><a href="privacidade.html">Privacidade</a></nav><div style="margin-top:14px">© <span id="year"></span> Kayor · Jornalismo com contexto</div></div></footer>
+<footer><div class="container"><a class="footer-brand" href="./" aria-label="Kayor — início"><img src="Logos/kayor_horizontal.png" alt="Kayor"></a><div>Informação com contexto. Jornalismo com responsabilidade.</div><nav class="footer-nav" aria-label="Navegação do rodapé"><a href="#inicio">Início</a><a href="#ultimas">Brasil e política</a><a href="#ultimas">Economia</a><a href="#ultimas">Mundo</a><a href="#pernambuco">Pernambuco</a><a href="politica-editorial.html">Princípios editoriais</a><a href="privacidade.html">Privacidade</a></nav><a class="kayor-instagram" href="https://www.instagram.com/jornalkayor/" target="_blank" rel="noopener noreferrer" aria-label="Acompanhe o Jornal Kayor no Instagram (abre em nova aba)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"></circle></svg><span>Acompanhe o Kayor no Instagram</span></a><div style="margin-top:14px">© <span id="year"></span> Kayor · Jornalismo com contexto</div></div></footer>
 <script>
 const now=new Date();document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'2-digit',month:'long'}).format(now).toUpperCase();document.getElementById('year').textContent=now.getFullYear();
 const links=[...document.querySelectorAll('[data-filter]')],empty=document.getElementById('empty');let activeCategory='Todas';
