@@ -208,9 +208,9 @@ if(error){console.error("Kayor: não foi possível carregar as matérias",error)
 const grid=document.getElementById("news-grid");grid.replaceChildren();
 const fmt=d=>d?new Intl.DateTimeFormat("pt-BR",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(d)):"";
 const card=a=>{
-const article=document.createElement("article");article.className="news-card";article.dataset.cat=a.category||"Brasil";
+const article=document.createElement("article");article.className="news-card";article.dataset.cat=a.category||"Sem editoria";
 if(a.cover_image_url){const im=document.createElement("img");im.className="thumb";im.src=a.cover_image_url;im.alt=a.cover_alt||a.title;im.width=1170;im.height=700;im.loading="lazy";im.decoding="async";im.addEventListener("error",()=>{im.hidden=true},{once:true});article.append(im)}
-const cat=document.createElement("div");cat.className="kicker";cat.textContent=a.category||"Brasil";
+const cat=document.createElement("div");cat.className="kicker";cat.textContent=a.category||"Sem editoria";
 const h=document.createElement("h3"),link=document.createElement("a");link.href="/noticia.html?id="+encodeURIComponent(a.slug);link.textContent=a.title;h.append(link);
 const summary=document.createElement("p");summary.className="summary";summary.textContent=a.subtitle||"Leia a matéria completa no Kayor.";
 const meta=document.createElement("div");meta.className="byline";meta.textContent=(a.author||"Redação Kayor").toUpperCase()+(a.published_at?" · "+fmt(a.published_at).toUpperCase():"");
@@ -227,7 +227,7 @@ document.querySelector(".lead-caption .byline").textContent=(lead.author||"REDA�
 if(lead.cover_image_url){const oldCover=document.querySelector(".lead-image");const cover=document.createElement("img");cover.className="lead-image";cover.src=lead.cover_image_url;cover.alt=lead.cover_alt||lead.title;cover.width=1170;cover.height=700;cover.fetchPriority="high";cover.decoding="async";cover.addEventListener("error",()=>{cover.hidden=true},{once:true});oldCover.replaceWith(cover)}
 }
 const side=document.querySelector(".side");side.replaceChildren();const sh=document.createElement("div");sh.className="side-heading";sh.textContent="Mais importantes";side.append(sh);
-articles.filter(a=>a.id!==lead.id).slice(0,3).forEach(a=>{const ar=document.createElement("article"),k=document.createElement("div"),h=document.createElement("h2"),l=document.createElement("a"),p=document.createElement("p");k.className="kicker";k.textContent=(a.category||"Brasil").toUpperCase();l.href="/noticia.html?id="+encodeURIComponent(a.slug);l.textContent=a.title;h.append(l);p.className="summary";p.textContent=a.subtitle||"Leia a matéria completa.";ar.append(k,h,p);side.append(ar)});
+articles.filter(a=>a.id!==lead.id).slice(0,3).forEach(a=>{const ar=document.createElement("article"),k=document.createElement("div"),h=document.createElement("h2"),l=document.createElement("a"),p=document.createElement("p");k.className="kicker";k.textContent=(a.category||"Sem editoria").toUpperCase();l.href="/noticia.html?id="+encodeURIComponent(a.slug);l.textContent=a.title;h.append(l);p.className="summary";p.textContent=a.subtitle||"Leia a matéria completa.";ar.append(k,h,p);side.append(ar)});
 }catch(e){console.error("Kayor: falha ao carregar matérias publicadas",e)}
 })();
 </script>
