@@ -203,7 +203,7 @@ if(new URLSearchParams(location.hash.slice(1)).get("type")==="recovery"){
  });
  return;
 }
-const {data:articles,error}=await client.from("kayor_articles").select("id,title,slug,subtitle,category,author,cover_image_url,cover_alt,featured,published_at,updated_at").eq("status","published").order("published_at",{ascending:false}).limit(30);
+const {data:articles,error}=await client.from("kayor_articles").select("id,title,slug,subtitle,category,author,cover_image_url,cover_alt,featured,published_at,updated_at").eq("status","published").eq("category",document.documentElement.dataset.editoria).order("published_at",{ascending:false}).limit(30);
 if(error){console.error("Kayor: não foi possível carregar as matérias",error);document.getElementById("empty").textContent="Não foi possível carregar as notícias agora. Tente novamente em instantes.";document.getElementById("empty").style.display="block";return;}if(!articles||!articles.length){document.getElementById("empty").textContent="Ainda não há matérias publicadas. Volte em breve para acompanhar as notícias do Kayor.";document.getElementById("empty").style.display="block";document.querySelector(".lead-caption h1").textContent="A redação do Kayor está preparando as primeiras matérias.";document.getElementById("side-empty").textContent="As matérias mais importantes aparecerão aqui assim que forem publicadas.";return;}
 const grid=document.getElementById("news-grid");grid.replaceChildren();
 const fmt=d=>d?new Intl.DateTimeFormat("pt-BR",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(d)):"";
